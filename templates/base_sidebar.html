@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Trading Bot{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        .navbar {
+            background-color: #343a40; /* Slightly darker navbar */
+        }
+        .navbar-brand img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar {
+            height: 100vh; /* Full height of the viewport */
+        }
+        .content {
+            flex: 1;
+        }
+        .d-flex {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .block-link {
+            display: block;
+            width: 100%;
+            color: black;
+            background-color: #f8f9fa;
+        }
+        .block-link:hover {
+            background-color: #d6d8db; /* Scale of grey for hover effect */
+            color: black !important;
+        }
+    </style>
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <div class="d-flex">
+        {% include 'components/sidebar.html' %}
+        <div class="content p-4">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

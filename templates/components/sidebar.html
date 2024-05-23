@@ -1,0 +1,24 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar">
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="{{ url_for('register_trading_account') }}" class="nav-link p-3 mb-2 block-link">
+                Register Trading Account
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('view_stocks') }}" class="nav-link p-3 mb-2 block-link">
+                View Stocks
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('select_algorithm') }}" class="nav-link p-3 mb-2 block-link">
+                Select Algorithm
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('view_trade_history') }}" class="nav-link p-3 mb-2 block-link">
+                View Trade History
+            </a>
+        </li>
+    </ul>
+</div>

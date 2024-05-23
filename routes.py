@@ -1,11 +1,12 @@
 import os
-from flask import Flask, redirect, render_template, request, send_from_directory, url_for
+from flask import send_from_directory, render_template, redirect, url_for
 from app import app
+from controller import auth_controller, user_controller, trading_account_controller
 
 @app.route('/')
 def index():
     print('Request for index page received')
-    return render_template('index.html')
+    return render_template('index.html', signed_in=False)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -13,45 +14,36 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-    name = request.form.get('name')
-    if name:
-        print('Request for hello page received with name=%s' % name)
-        return render_template('hello.html', name=name)
-    else:
-        print('Request for hello page received with no name or blank name -- redirecting')
-        return redirect(url_for('index'))
+    return user_controller.hello()
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        confirm_password = request.form.get('confirm_password')
-
-        if email and password and password == confirm_password:
-            print(f'Request for register page received with email={email}')
-            # Here you can add logic to save the user to a database
-            return redirect(url_for('index'))
-        else:
-            print('Request for register page received with invalid data')
-            # Render the form again with an error message
-            return render_template('register.html', error='Please provide valid data and ensure passwords match.')
-
-    return render_template('register.html')
+    return user_controller.register()
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+    return auth_controller.login()
 
-        if email and password:
-            print(f'Request for login page received with email={email}')
-            # Here you can add logic to check the user's credentials
-            return redirect(url_for('index'))
-        else:
-            print('Request for login page received with invalid data')
-            # Render the form again with an error message
-            return render_template('login.html', error='Please provide valid credentials.')
+@app.route('/logout')
+def logout():
+    return redirect(url_for('index'))
 
-    return render_template('login.html')
+@app.route('/register_trading_account', methods=['GET'])
+def register_trading_account():
+    return trading_account_controller.register_trading_account()
+
+@app.route('/register_trading_account', methods=['POST'])
+def save_trading_account():
+    return trading_account_controller.save_trading_account()
+
+@app.route('/view_stocks')
+def view_stocks():
+    return render_template('pages/view_stocks.html', signed_in=True)
+
+@app.route('/select_algorithm')
+def select_algorithm():
+    return render_template('pages/select_algorithm.html', signed_in=True)
+
+@app.route('/view_trade_history')
+def view_trade_history():
+    return render_template('pages/view_trade_history.html', signed_in=True)

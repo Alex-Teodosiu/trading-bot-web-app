@@ -1,0 +1,22 @@
+{% extends 'base_sidebar.html' %}
+
+{% block title %}Register Trading Account - Trading Bot{% endblock %}
+
+{% block content %}
+<h2>Register Trading Account</h2>
+<p>To start trading with our bot, you need to create a trading account with Alpaca. Click the link below to get started:</p>
+<p><a href="https://alpaca.markets/" target="_blank" class="btn btn-info">Create a Trading Account with Alpaca</a></p>
+<p>Once you have created your trading account, please enter your API key and API secret below:</p>
+
+<form method="post" action="{{ url_for('save_trading_account') }}">
+    <div class="mb-3">
+        <label for="api_key" class="form-label">API Key</label>
+        <input type="text" class="form-control" id="api_key" name="api_key" required>
+    </div>
+    <div class="mb-3">
+        <label for="api_secret" class="form-label">API Secret</label>
+        <input type="password" class="form-control" id="api_secret" name="api_secret" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

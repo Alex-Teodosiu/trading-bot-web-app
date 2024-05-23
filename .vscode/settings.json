@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c9a47671-e339-47d1-8f6d-74fb09cea806/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/automated-trading-bot",
+    "appService.deploySubpath": "."
+}
