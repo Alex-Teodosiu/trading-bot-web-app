@@ -1,7 +1,7 @@
-import os
-from flask import send_from_directory, render_template, redirect, url_for
+from flask import send_from_directory, render_template, redirect, url_for, session, flash
 from app import app
 from controller import auth_controller, user_controller, trading_account_controller
+import os
 
 @app.route('/')
 def index():
@@ -26,6 +26,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    session.pop('user_id', None)
     return redirect(url_for('index'))
 
 @app.route('/register_trading_account', methods=['GET'])
