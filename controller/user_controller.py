@@ -19,6 +19,7 @@ def register():
                 response.raise_for_status()  # Raise an exception for HTTP errors
 
                 # If the response is a string (JWT token), consider it as success
+                #change the response.text to response.json()['message'] to get the error message
                 if isinstance(response.text, str):
                     flash('User registered successfully. Please log in.', 'success')
                     return redirect(url_for('login'))
