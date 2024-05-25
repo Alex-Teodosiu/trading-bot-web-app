@@ -3,19 +3,74 @@
 {% block title %}Home - Trading Bot{% endblock %}
 
 {% block content %}
+
 <div class="px-4 py-3 my-2 text-center">
     <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/bot-icon.svg') }}" alt="Automated Trading Bot Logo" width="192" height="192"/>
     <h1 class="display-6 fw-bold text-primary">Welcome to the Automated Trading Bot</h1>
+    <p class="lead text-white-50">Revolutionizing Trading with Automation</p>
 </div>
-<form method="post" action="{{ url_for('hello') }}">
-    <div class="col-md-6 mx-auto text-center">
-        <label for="name" class="form-label fw-bold fs-5">User</label>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-            <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-        </div>            
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Say Hello</button>
-        </div>            
+
+
+<!-- Content Section -->
+<div class="container py-5 d-flex flex-column vh-100">
+    <div class="row text-center">
+      <div class="col-lg-4">
+        <div class="icon mb-3">
+          <i class="bi bi-graph-up-arrow" style="font-size: 2rem; color: #007bff;"></i>
+        </div>
+        <h2 class="fw-bold">Enhance Your Trading</h2>
+        <p>Our Automated Trading Bot eliminates emotional bias and inconsistencies, ensuring systematic trading that monitors and trades numerous stocks simultaneously.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="icon mb-3">
+          <i class="bi bi-ui-checks-grid" style="font-size: 2rem; color: #007bff;"></i>
+        </div>
+        <h2 class="fw-bold">User-Friendly Interface</h2>
+        <p>Monitor the market and trades effortlessly with our intuitive interface. Built-in algorithms and a paper trading feature make it perfect for both new and experienced traders.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="icon mb-3">
+          <i class="bi bi-plug" style="font-size: 2rem; color: #007bff;"></i>
+        </div>
+        <h2 class="fw-bold">Seamless Integration</h2>
+        <p>Connect your Alpaca trading account to our platform for real-time data fetching and trade execution. Experience hassle-free automated trading today.</p>
+      </div>
     </div>
-</form>
-{% endblock %}
+
+    <br>
+    <br>
+    <div class="row text-center mt-5">
+        <div class="col-lg-12">
+            <div class="mx-auto" style="max-width: 700px;">
+                <h3 class="fw-bold">Advanced Trading Algorithms</h3>
+                <p>Our platform offers a range of advanced trading algorithms that can be customized to suit your trading style and preferences. Whether you are a day trader or a long-term investor, our algorithms can help you achieve your financial goals.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center mt-5">
+        <div class="col-lg-12">
+            <div class="mx-auto" style="max-width: 700px;">
+                <h3 class="fw-bold">Comprehensive Market Analysis</h3>
+                <p>Stay ahead of the market with our comprehensive analysis tools. Our platform provides real-time data and insights that help you make informed trading decisions. Analyze historical data, track market trends, view charts.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center mt-5">
+        <div class="col-lg-12">
+            <div class="mx-auto" style="max-width: 700px;">
+                <h3 class="fw-bold">Secure and Reliable</h3>
+                <p>Your security is our top priority. Our platform uses security measures like SSH and HTTPS to ensure that your data and transactions are safe. With our reliable infrastructure entirely hosted on Azure, you can trade with confidence knowing that your assets are protected.</p>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+      <p>&copy; 2024 Trading Bot. All rights reserved.</p>
+    </div>
+  </footer>
+  {% endblock %}
