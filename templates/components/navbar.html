@@ -1,15 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('index') }}">
-            <img src="{{ url_for('static', filename='images/bot-icon.svg') }}" alt="Trading Bot Logo">
-            Trading Bot
-        </a>
+        {% if session.user_id %}
+            <span class="navbar-brand">
+                <img src="{{ url_for('static', filename='images/bot-icon.svg') }}" alt="Trading Bot Logo">
+                Trading Bot
+            </span>
+        {% else %}
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/bot-icon.svg') }}" alt="Trading Bot Logo">
+                Trading Bot
+            </a>
+        {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                {% if signed_in %}
+                {% if session.user_id %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                     </li>
