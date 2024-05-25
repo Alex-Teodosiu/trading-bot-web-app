@@ -29,13 +29,10 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('index'))
 
-@app.route('/register_trading_account', methods=['GET'])
+@app.route('/register_trading_account', methods=['GET', 'POST'])
 def register_trading_account():
     return trading_account_controller.register_trading_account()
 
-@app.route('/register_trading_account', methods=['POST'])
-def save_trading_account():
-    return trading_account_controller.save_trading_account()
 
 @app.route('/view_stocks')
 def view_stocks():

@@ -4,14 +4,30 @@
 
 {% block content %}
 <h2>Register Trading Account</h2>
-<p>To start trading with our bot, you need to create a trading account with Alpaca. Click the link below to get started:</p>
-<p><a href="https://alpaca.markets/" target="_blank" class="btn btn-info">Create a Trading Account with Alpaca</a></p>
-<p>Once you have created your trading account, please enter your API key and API secret below:</p>
+{% if api_key %}
+    <div class="alert alert-info" role="alert">
+        Trading account already registered with API Key: {{ api_key }}
+    </div>
+{% else %}
+    <p>To start trading with our bot, you need to create a trading account with Alpaca. Click the link below to get started:</p>
+    <p><a href="https://alpaca.markets/" target="_blank" class="btn btn-info">Create a Trading Account with Alpaca</a></p>
+    <p>Once you have created your trading account, please enter your API key and API secret below:</p>
+{% endif %}
 
-<form method="post" action="{{ url_for('save_trading_account') }}">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form method="post" action="{{ url_for('register_trading_account') }}">
     <div class="mb-3">
         <label for="api_key" class="form-label">API Key</label>
-        <input type="text" class="form-control" id="api_key" name="api_key" required>
+        <input type="text" class="form-control" id="api_key" name="api_key" value="{{ api_key if api_key else '' }}" {% if api_key %} readonly {% endif %} required>
     </div>
     <div class="mb-3">
         <label for="api_secret" class="form-label">API Secret</label>
