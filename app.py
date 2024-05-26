@@ -9,5 +9,7 @@ app.config['AUTH_SERVER_URL'] = os.getenv('AUTH_SERVER_URL')
 # Register routes
 from routes import *
 
+# initialize_routes(app)
+
 if __name__ == '__main__':
     app.run()

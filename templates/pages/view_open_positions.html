@@ -1,0 +1,90 @@
+{% extends 'base_sidebar.html' %}
+
+{% block title %}View Open Positions - Trading Bot{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Positions</h2>
+    <p>View and manage your positions.</p>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="chart-container" style="position: relative; height:200px; width:200px">
+                <canvas id="positionDistributionChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mb-3" id="positionFilterTabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#" data-filter="all">All</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-filter="long">Long</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-filter="short">Short</a>
+        </li>
+    </ul>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search by symbol..." id="searchInput">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+        </div>
+    </div>
+
+    <table class="table table-striped" id="positionsTable">
+        <thead>
+            <tr>
+                <th scope="col">Asset</th>
+                <th scope="col">Side</th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Market Value</th>
+                <th scope="col">Cost Basis</th>
+                <th scope="col">Total P/L (%)</th>
+                <th scope="col">Total P/L ($)</th>
+            </tr>
+        </thead>
+        <tbody id="positionsTableBody">
+            {% for position in positions %}
+            <tr data-side="{{ position.side }}" data-symbol="{{ position.symbol }}">
+                <td><a href="#">{{ position.symbol }}</a></td>
+                <td>{{ position.side }}</td>
+                <td>${{ position.current_price | round(2)}}</td>
+                <td>{{ position.qty | round(2)}}</td>
+                <td>${{ position.market_value | round(2)}}</td>
+                <td>${{ position.cost_basis | round(2)}}</td>
+                <td id="plpc">{{ (position.unrealized_plpc * 100) | round(2) }}%</td>
+                <td id="pl">${{ position.unrealized_pl | round(2)}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <select class="form-select" style="width: auto;">
+                <option selected>Page Size: 10</option>
+                <option value="1">10</option>
+                <option value="2">20</option>
+                <option value="3">50</option>
+            </select>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Hidden element to store counts -->
+<div id="positionCounts" data-long="{{ long_count }}" data-short="{{ short_count }}" style="display:none;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='bootstrap/js/positions.js') }}"></script>
+{% endblock %}
