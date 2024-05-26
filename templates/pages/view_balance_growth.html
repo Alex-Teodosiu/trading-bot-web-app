@@ -1,0 +1,27 @@
+{% extends 'base_sidebar.html' %}
+
+{% block title %}Balance Growth - Trading Bot{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Balance Growth</h2>
+    <p>Track the growth of your account balance over time.</p>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="chart-container" style="position: relative; height:400px; width:100%">
+                <canvas id="balanceGrowthChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden element to store balance growth data -->
+<p id="balanceGrowthData"
+   data-timestamp="{{ balance_growth.timestamp | join(',') }}"
+   data-equity="{{ balance_growth.equity | join(',') }}"></p>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+   <script src="https://cdn.jsdelivr.net/npm/date-fns@2.21.3"></script>
+   <script src="{{ url_for('static', filename='bootstrap/js/balance_growth.js') }}"></script>
+{% endblock %}

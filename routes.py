@@ -1,6 +1,6 @@
 from flask import send_from_directory, render_template, redirect, url_for, session, flash
 from app import app
-from controller import auth_controller, user_controller, trading_account_controller, position_controller
+from controller import auth_controller, user_controller, trading_account_controller, position_controller, balance_controller
 import os
 # from controller.stock_controller import stocks_blueprint
 
@@ -49,6 +49,10 @@ def select_algorithm():
 @app.route('/view_open_positions', methods=['GET', 'POST'])
 def view_open_positions():
     return position_controller.view_open_positions()
+
+@app.route('/view_balance_growth', methods=['GET', 'POST'])
+def view_balance_growth():
+    return balance_controller.view_balance_growth_page()
 
 @app.route('/view_trade_history')
 def view_trade_history():
