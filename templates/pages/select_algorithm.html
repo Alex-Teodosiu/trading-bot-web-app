@@ -2,7 +2,97 @@
 
 {% block title %}Select Algorithm - Trading Bot{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/custom.css') }}">
+{% endblock %}
+
 {% block content %}
-<h2>Select Algorithm</h2>
-<p>Content for selecting an algorithm goes here.</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Select Algorithm</h2>
+    <div class="row algorithm-container">
+        <!-- Algorithm: Momentum -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <img src="{{ url_for('static', filename='images/momentum.png') }}" class="rounded-circle img-fluid" alt="Algorithm Image" style="width: 100px; height: 100px;">
+                    </div>
+                    <h4 class="card-title text-center">Momentum</h4>
+                    <p class="flex-grow-1">Momentum trading, a popular approach in short-term trading, revolves around spotting changing asset prices and capitalizing on these changes by aligning positions with the anticipated price movement.</p>
+                    <div class="d-grid gap-2 mt-auto">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#algorithmModal" data-algorithm="Momentum">Select</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Algorithm: Bollinger Bands -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <img src="{{ url_for('static', filename='images/bollinger.png') }}" class="rounded-circle img-fluid" alt="Algorithm Image" style="width: 100px; height: 100px;">
+                    </div>
+                    <h4 class="card-title text-center">Bollinger Bands</h4>
+                    <p class="flex-grow-1">Bollinger Bands use standard deviation bands above and below a moving average to indicate volatility and potential price reversals.</p>
+                    <div class="d-grid gap-2 mt-auto">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#algorithmModal" data-algorithm="Bollinger Bands">Select</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create New Algorithm (Disabled) -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <img src="{{ url_for('static', filename='images/plus.png') }}" class="rounded-circle img-fluid" alt="Algorithm Image" style="width: 100px; height: 100px;">
+                    </div>
+                    <h4 class="card-title text-center">Create New</h4>
+                    <p class="flex-grow-1">Create a new algorithm tailored to your trading strategy and preferences.</p>
+                    <div class="d-grid gap-2 mt-auto">
+                        <button class="btn btn-secondary" id="createNewAlgorithmButton" disabled>Create New</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container for dynamically added algorithm cards -->
+    <div class="row mt-4 new-algorithm-container">
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="algorithmModal" tabindex="-1" aria-labelledby="algorithmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="algorithmModalLabel">Run Algorithm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="algorithmForm">
+                    <p>
+                        Enter the symbol you'd like the algorithm to run on. 
+                        <br>
+                        The algorithm will make trades on this symbol.
+                    </p>
+                    <div class="mb-3">
+                        <label for="algorithmSymbol" class="form-label">Symbol</label>
+                        <input type="text" class="form-control" id="algorithmSymbol" placeholder="Enter symbol">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary" id="runAlgorithmButton">Run Algorithm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='bootstrap/js/select_algorithm.js') }}"></script>
+
 {% endblock %}
