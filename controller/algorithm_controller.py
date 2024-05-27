@@ -6,6 +6,7 @@ algorithm_bp = Blueprint('algorithm_bp', __name__)
 def select_algorithm_page():
     return render_template('pages/select_algorithm.html')
 
+
 @algorithm_bp.route('/algorithm/save-algorithm-run', methods=['POST'])
 def save_algorithm_run():
     data = request.json

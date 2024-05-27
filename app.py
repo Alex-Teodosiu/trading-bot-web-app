@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 from controller.algorithm_controller import algorithm_bp
+from controller.profile_controller import profile_bp
 
 app = Flask(__name__)
 
@@ -10,9 +11,9 @@ app.config['AUTH_SERVER_URL'] = os.getenv('AUTH_SERVER_URL')
 # Register routes
 from routes import *
 
-# initialize_routes(app)
 
 app.register_blueprint(algorithm_bp)
+app.register_blueprint(profile_bp)
 
 if __name__ == '__main__':
     app.run()
