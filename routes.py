@@ -1,7 +1,7 @@
 from flask import send_from_directory, render_template, redirect, url_for, session, flash
 from app import app
 from controller import auth_controller, user_controller, trading_account_controller, position_controller
-from controller import profile_controller, algorithm_controller, balance_controller
+from controller import profile_controller, algorithm_controller, balance_controller, stock_controller
 import os
 # from controller.stock_controller import stocks_blueprint
 
@@ -40,7 +40,7 @@ def register_trading_account():
 
 @app.route('/view_stocks')
 def view_stocks():
-    return render_template('pages/view_stocks.html', signed_in=True)
+    return stock_controller.view_stocks()
 
 @app.route('/select_algorithm')
 def select_algorithm():
