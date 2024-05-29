@@ -15,6 +15,8 @@ def balance_growth():
 
 
 def view_balance_growth_page():
+    if not session.get('user_id'):
+        return render_template('login.html')
     url = "https://paper-api.alpaca.markets/v2/account/portfolio/history"
     headers = {
         "accept": "application/json",

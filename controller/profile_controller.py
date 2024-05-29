@@ -4,12 +4,18 @@ import re
 
 profile_bp = Blueprint('profile_bp', __name__)
 
-@profile_bp.route('/profile', methods=['GET'])
+@profile_bp.route('/view_profile', methods=['GET'])
 def profile_page():
-    email = get_email()
-    if email:
-        return render_template('pages/profile.html', email=email)
+    if not session.get('user_id'):
+        return render_template('login.html')
+    if get_email() is not None:
+        email = get_email()
     else:
+        email = None
+
+    try:
+        return render_template('pages/view_profile.html', email=email)
+    except:
         return jsonify({'error': 'Failed to fetch email'}), 500
 
 def get_email():

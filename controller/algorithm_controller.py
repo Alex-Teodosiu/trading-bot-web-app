@@ -4,6 +4,8 @@ import requests
 algorithm_bp = Blueprint('algorithm_bp', __name__)
 
 def select_algorithm_page():
+    if not session.get('user_id'):
+        return render_template('login.html')
     return render_template('pages/select_algorithm.html')
 
 

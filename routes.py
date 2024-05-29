@@ -17,10 +17,6 @@ def index():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-@app.route('/hello', methods=['POST'])
-def hello():
-    return user_controller.hello()
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return user_controller.register()
@@ -60,4 +56,4 @@ def view_trade_history():
 
 @app.route('/view_profile')
 def view_profile():
-    return profile_controller.view_profile()
+    return profile_controller.profile_page()

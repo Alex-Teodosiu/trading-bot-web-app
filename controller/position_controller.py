@@ -2,6 +2,8 @@ import requests
 from flask import render_template, request, session, flash
 
 def view_open_positions():
+    if not session.get('user_id'):
+        return render_template('login.html')
     user_id = session.get('user_id')
     
     if not user_id:

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, Blueprint, current_app
+from flask import Flask, render_template, jsonify, request, Blueprint, current_app, session
 import requests
 from datetime import datetime, timedelta
 import json
@@ -7,6 +7,8 @@ stock_bp = Blueprint('stock_bp', __name__)
 
 @stock_bp.route('/stocks')
 def view_stocks():
+    if not session.get('user_id'):
+        return render_template('login.html')
     return render_template('pages/view_stocks.html')
 
 @stock_bp.route('/stock_historical_market_data', methods=['GET'])

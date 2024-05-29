@@ -2,6 +2,8 @@ from flask import render_template, request, flash, current_app, session
 import requests
 
 def register_trading_account():
+    if not session.get('user_id'):
+        return render_template('login.html')
     # Check if API key is already in session
     api_key_in_session = session.get('api_key')
 
