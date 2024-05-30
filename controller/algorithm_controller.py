@@ -11,8 +11,9 @@ def select_algorithm_page():
 
 @algorithm_bp.route('/algorithm/save-algorithm-run', methods=['POST'])
 def save_algorithm_run():
-    data = request.json
     user_id = session.get('user_id')
+    print(user_id)
+    data = request.json
     symbol = data.get('symbol')
     algorithm_name = data.get('algorithm_name')
     time_stamp = data.get('time_stamp')

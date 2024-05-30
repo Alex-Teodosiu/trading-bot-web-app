@@ -8,13 +8,22 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Candlestick Data',
                 data: [],
-                categoryPercentage: 0.05, // Adjust to control spacing between bars
-                barPercentage: 0.5, // Adjust to control width of bars
+                categoryPercentage: 0.05, 
+                barPercentage: 0.5, 
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'GOOGL'
+                },
+                legend: {
+                    display: false
+                }
+            },
             scales: {
                 x: {
                     type: 'time',
@@ -33,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         maxRotation: 0,
                         autoSkip: false,
                         stepSize: 1,
-                        maxTicksLimit: 30
+                        maxTicksLimit: 20
                     },
                     offset: true
                 },
@@ -50,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fetchData = async (symbol) => {
         console.log(`Fetching data for symbol: ${symbol}`);
         try {
-            const response = await fetch(`/stock_historical_market_data?symbol=${symbol}&last_x_days=30`);
+            const response = await fetch(`/stock_historical_market_data?symbol=${symbol}&last_x_days=45`);
             const data = await response.json();
             console.log("Data fetched successfully:", data);
 
@@ -74,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Formatted data for candlestick chart:", formattedData);
 
             stockChart.data.datasets[0].data = formattedData;
+            stockChart.options.plugins.title.text = symbol;  // Update chart title
             stockChart.update();
 
             console.log("Chart updated successfully");

@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var algorithmContainer = document.querySelector('.new-algorithm-container');
     var selectedAlgorithm = '';
 
-    // Load running algorithms on page load
     fetch('/algorithm/load-running-algorithms', {
         method: 'GET',
         headers: {
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Running algorithms:', data);
 
         data.running_algorithms.forEach(algorithm => {
-            // Create a new card for each running algorithm
             var newCard = document.createElement('div');
             newCard.className = 'col-md-4 mb-4';
             newCard.innerHTML = `
@@ -33,10 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `;
 
-            // Append the new card to the container
             algorithmContainer.appendChild(newCard);
 
-            // Add event listener to the stop button
             var stopButton = newCard.querySelector('.stop-algorithm-button');
             stopButton.addEventListener('click', function () {
                 stopAlgorithm(newCard, algorithm.algorithm, algorithm.symbol);
@@ -57,21 +53,17 @@ document.addEventListener('DOMContentLoaded', function () {
     runAlgorithmButton.addEventListener('click', function () {
         var symbol = document.getElementById('algorithmSymbol').value;
 
-        // Check if the symbol input is empty
         if (!symbol) {
             alert('Please enter a symbol.');
             return;
         }
 
-        // Prepare the request payload
         var payload = {
-            user_id: 'd811a8c7-3b77-46d9-873f-e471b8f5935b',
             symbol: symbol,
             algorithm_name: selectedAlgorithm,
             time_stamp: new Date().toISOString().split('T')[0]
         };
 
-        // Send the request to the backend
         fetch('/algorithm/save-algorithm-run', {
             method: 'POST',
             headers: {
@@ -83,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log('Success:', data);
 
-            // Create a new card for the running algorithm
             var newCard = document.createElement('div');
             newCard.className = 'col-md-4 mb-4';
             newCard.innerHTML = `
@@ -99,17 +90,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `;
 
-            // Append the new card to the container
             algorithmContainer.appendChild(newCard);
 
-            // Close the modal after running the algorithm
             algorithmModal.hide();
 
-            // Ensure modal backdrop is removed
             document.body.classList.remove('modal-open');
             document.querySelector('.modal-backdrop').remove();
 
-            // Add event listener to the stop button
             var stopButton = newCard.querySelector('.stop-algorithm-button');
             stopButton.addEventListener('click', function () {
                 stopAlgorithm(newCard, selectedAlgorithm, symbol);
@@ -121,21 +108,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Create new algorithm (placeholder functionality)
     document.getElementById('createNewAlgorithmButton').addEventListener('click', function () {
         alert('This functionality is coming soon!');
     });
 
-    // Function to stop the algorithm
     function stopAlgorithm(cardElement, algorithmName, symbol) {
-        // Prepare the request payload
         var payload = {
-            user_id: 'd811a8c7-3b77-46d9-873f-e471b8f5935b',
             symbol: symbol,
             algorithm_name: algorithmName
         };
 
-        // Send the request to the backend
         fetch('/algorithm/stop-algorithm', {
             method: 'DELETE',
             headers: {
@@ -147,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log('Algorithm stopped:', data);
             alert('Algorithm has been stopped.');
-            // Remove the card from the DOM
             cardElement.remove();
         })
         .catch((error) => {
