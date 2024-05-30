@@ -6,7 +6,7 @@ from controller.stock_controller import stock_bp
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_default_secret_key')  # Make sure to set a secret key
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  
 app.config['AUTH_SERVER_URL'] = os.getenv('AUTH_SERVER_URL')
 
 # Register routes

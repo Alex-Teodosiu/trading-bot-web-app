@@ -50,10 +50,6 @@ def view_open_positions():
 def view_balance_growth():
     return balance_controller.view_balance_growth_page()
 
-@app.route('/view_trade_history')
-def view_trade_history():
-    return render_template('pages/view_trade_history.html', signed_in=True)
-
 @app.route('/view_profile')
 def view_profile():
     return profile_controller.profile_page()

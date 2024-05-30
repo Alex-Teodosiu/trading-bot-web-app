@@ -4,7 +4,6 @@ import requests
 def register_trading_account():
     if not session.get('user_id'):
         return render_template('login.html')
-    # Check if API key is already in session
     api_key_in_session = session.get('api_key')
 
     if request.method == 'POST':
@@ -28,7 +27,7 @@ def register_trading_account():
             if result.get('id') and result.get('api_key') and result.get('api_secret') and result.get('account_number'):
                 flash('Trading account validated successfully. You can now use the rest of the web app functionality!', 'success')
                 session.update({'api_key': api_key, 'api_secret': api_secret})
-                api_key_in_session = api_key  # Update the variable to reflect the new API key in session
+                api_key_in_session = api_key  
             else:
                 flash('Trading account validation failed.', 'danger')
 

@@ -12,17 +12,14 @@ def select_algorithm_page():
 @algorithm_bp.route('/algorithm/save-algorithm-run', methods=['POST'])
 def save_algorithm_run():
     user_id = session.get('user_id')
-    print(user_id)
     data = request.json
     symbol = data.get('symbol')
     algorithm_name = data.get('algorithm_name')
     time_stamp = data.get('time_stamp')
-    print(f"User ID: {user_id}, Symbol: {symbol}, Algorithm Name: {algorithm_name}, Time Stamp: {time_stamp}")
 
     if not user_id:
         return jsonify({'error': 'User not authenticated'}), 401
 
-#current_app.config['AUTH_SERVER_URL'] + '
     url = current_app.config['AUTH_SERVER_URL'] + '/algorithm/save-algorithm-run'
     payload = {
         "user_id": user_id,

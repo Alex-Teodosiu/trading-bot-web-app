@@ -4,7 +4,7 @@ from app import app
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
-    app.config['AUTH_SERVER_URL'] = 'http://testserver'  # Add missing configuration
+    app.config['AUTH_SERVER_URL'] = 'http://testserver'  
     with app.test_client() as client:
         yield client
 
@@ -12,8 +12,7 @@ def test_index_route(client):
     """Test the index route."""
     rv = client.get('/')
     assert rv.status_code == 200
-    # Remove the incorrect assertion
-    assert b'Automated Trading Bot' in rv.data  # Adjust the assertion to match the actual page content
+    assert b'Automated Trading Bot' in rv.data  
 
 def test_favicon_route(client):
     """Test the favicon route."""
@@ -37,7 +36,7 @@ def test_login_route(client):
 def test_logout_route(client):
     """Test the logout route."""
     rv = client.get('/logout')
-    assert rv.status_code == 302  # Redirect to index
+    assert rv.status_code == 302  
 
 def test_register_trading_account_route(client):
     """Test the register trading account route."""

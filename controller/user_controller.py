@@ -16,10 +16,9 @@ def register():
                 response = requests.post(auth_server_url, json=payload, headers=headers)
                 print(f"Response Status Code: {response.status_code}")
                 print(f"Response Text: {response.text}")
-                response.raise_for_status()  # Raise an exception for HTTP errors
+                response.raise_for_status()  
 
-                # If the response is a string (JWT token), consider it as success
-                #change the response.text to response.json()['message'] to get the error message
+
                 if isinstance(response.text, str):
                     flash('User registered successfully. Please log in.', 'success')
                     return redirect(url_for('login'))
@@ -28,7 +27,6 @@ def register():
                     error_message = response_data.get('message', 'An error occurred during registration.')
                     return render_template('register.html', error=error_message)
             except requests.exceptions.RequestException as e:
-                # Attempt to extract the error message from the response, if available
                 error_message = 'An error occurred while processing your request.'
                 try:
                     error_message = response.json().get('message', error_message)

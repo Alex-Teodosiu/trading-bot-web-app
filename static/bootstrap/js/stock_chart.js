@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Formatted data for candlestick chart:", formattedData);
 
             stockChart.data.datasets[0].data = formattedData;
-            stockChart.options.plugins.title.text = symbol;  // Update chart title
+            stockChart.options.plugins.title.text = symbol;  
             stockChart.update();
 
             console.log("Chart updated successfully");

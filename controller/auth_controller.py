@@ -13,7 +13,7 @@ def login():
             try:
                 auth_server_url = current_app.config['AUTH_SERVER_URL'] + '/users/signin'
                 response = requests.post(auth_server_url, json=payload, headers=headers)
-                response.raise_for_status()  # Raise an exception for HTTPS errors
+                response.raise_for_status()  
                 response_data = response.json()
                 if response_data.get('message') == 'Signed in successfully.':
                     session['user_id'] = response_data.get('user_id')
@@ -31,7 +31,6 @@ def login():
                 else:
                     return render_template('login.html', error=response_data.get('error', 'Invalid email or password.'))
             except requests.exceptions.RequestException as e:
-                # Attempt to extract the error message from the response, if available
                 error_message = 'An error occurred while processing your request.'
                 try:
                     error_message = response.json().get('error', error_message)
