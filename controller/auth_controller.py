@@ -24,9 +24,12 @@ def login():
                     session['user_id'] = response_data.get('user_id')
 
                     # Check if the user has a trading account
-                    trading_account_data = trading_account_controller.get_trading_account_by_user_id(session.get('user_id'))
-                    print(trading_account_data)
-
+                    try:
+                        trading_account_data = trading_account_controller.get_trading_account_by_user_id(session.get('user_id'))
+                        print(trading_account_data)
+                    except requests.exceptions.RequestException as e:
+                        print(f"An error occurred: {e}")
+                        return render_template('login.html', error='An error occurred while processing your request.')
                     if trading_account_data is not None and trading_account_data.get('api_key') and trading_account_data.get('api_secret'):
                         session['api_key'] = trading_account_data.get('api_key')
                         session['api_secret'] = trading_account_data.get('api_secret')
