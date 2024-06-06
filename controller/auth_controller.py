@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, current_app
 import requests
-from controller.trading_account_controller import get_trading_account_by_user_id
+import controller.trading_account_controller as trading_account_controller
 
 def login():
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def login():
                     session['user_id'] = response_data.get('user_id')
 
                     # Check if the user has a trading account
-                    trading_account_data = get_trading_account_by_user_id(session.get('user_id'))
+                    trading_account_data = trading_account_controller.get_trading_account_by_user_id(session.get('user_id'))
                     print(trading_account_data)
 
                     if trading_account_data is not None and trading_account_data.get('api_key') and trading_account_data.get('api_secret'):
