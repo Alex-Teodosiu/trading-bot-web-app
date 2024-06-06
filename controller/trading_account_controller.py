@@ -38,6 +38,8 @@ def register_trading_account():
 
 
 def get_trading_account_by_user_id(user_id):
+    print(f"Getting trading account for user with ID: {user_id}")
+    print(f"Auth Server URL: {current_app.config['AUTH_SERVER_URL']}")
     trading_account_url = current_app.config['AUTH_SERVER_URL'] + '/trading-accounts/get-account-by-user-id'
     params = {'user_id': user_id}
     trading_account_response = requests.get(trading_account_url, params=params)

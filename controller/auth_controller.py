@@ -17,6 +17,7 @@ def login():
                 response.raise_for_status()  
                 response_data = response.json()
                 print(response_data)
+                print(response_data.get('message'))
                 if response_data.get('message') == 'Signed in successfully.':
                     print('User signed in successfully.')
                     print(response_data.get('user_id'))
