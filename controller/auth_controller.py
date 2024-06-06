@@ -33,8 +33,11 @@ def login():
                     if trading_account_data is not None and trading_account_data.get('api_key') and trading_account_data.get('api_secret'):
                         session['api_key'] = trading_account_data.get('api_key')
                         session['api_secret'] = trading_account_data.get('api_secret')
+                        print("session data")
+                        print(session['api_key'])
                         return redirect(url_for('register_trading_account'))
                     else:
+                        print('redirecting to trading account page without session data')
                         return redirect(url_for('register_trading_account'))
 
                 else:
