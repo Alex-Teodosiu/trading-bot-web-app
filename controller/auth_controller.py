@@ -6,6 +6,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        print(f"Email: {email}, Password: {password}")
 
         if email and password:
             payload = {'email': email, 'password': password}
@@ -15,11 +16,13 @@ def login():
                 response = requests.post(auth_server_url, json=payload, headers=headers)
                 response.raise_for_status()  
                 response_data = response.json()
+                print(response_data)
                 if response_data.get('message') == 'Signed in successfully.':
                     session['user_id'] = response_data.get('user_id')
 
                     # Check if the user has a trading account
                     trading_account_data = get_trading_account_by_user_id(session.get('user_id'))
+                    print(trading_account_data)
 
                     if trading_account_data is not None and trading_account_data.get('api_key') and trading_account_data.get('api_secret'):
                         session['api_key'] = trading_account_data.get('api_key')
