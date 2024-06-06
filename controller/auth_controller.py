@@ -18,6 +18,8 @@ def login():
                 response_data = response.json()
                 print(response_data)
                 if response_data.get('message') == 'Signed in successfully.':
+                    print('User signed in successfully.')
+                    print(response_data.get('user_id'))
                     session['user_id'] = response_data.get('user_id')
 
                     # Check if the user has a trading account
