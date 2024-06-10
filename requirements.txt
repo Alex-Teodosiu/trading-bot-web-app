@@ -5,13 +5,10 @@ Flask==2.2.2
 Flask-Login==0.6.3
 gunicorn==22.0.0
 idna==3.7
-iniconfig==2.0.0
 itsdangerous==2.2.0
 Jinja2==3.1.4
 MarkupSafe==2.1.5
 packaging==24.0
-pluggy==1.5.0
-pytest==8.2.1
 python-dotenv==1.0.1
 requests==2.32.2
 urllib3==2.2.1
